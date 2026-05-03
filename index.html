@@ -3,692 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Filistin'in Doğruları — Medya Okuryazarlığı Platformu</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Dijital Dedektif: Filistin Dosyası</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #0f0e17;
-    --paper: #fffcf5;
-    --cream: #f5f0e8;
-    --accent: #e63946;
-    --accent2: #2b6cb0;
-    --accent3: #276749;
-    --muted: #6b7280;
-    --border: #d1c9b8;
-    --card-bg: #ffffff;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
-
-  .site-header {
-    background: var(--ink); color: var(--paper);
-    padding: 2.2rem 1.5rem 1.6rem; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .site-header::before {
-    content: ''; position: absolute; top: -40px; left: -40px;
-    width: 180px; height: 180px; border: 2px solid rgba(255,255,255,0.07); border-radius: 50%;
-  }
-  .site-header::after {
-    content: ''; position: absolute; bottom: -60px; right: -20px;
-    width: 220px; height: 220px; border: 2px solid rgba(255,255,255,0.05); border-radius: 50%;
-  }
-  .site-header h1 {
-    font-family: 'Syne', sans-serif; font-size: clamp(1.4rem, 4vw, 2.4rem);
-    font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 0.4rem;
-  }
-  .site-header .subtitle {
-    font-family: 'Syne', sans-serif; font-size: clamp(0.7rem, 2vw, 0.85rem);
-    color: rgba(255,255,255,0.48); font-weight: 400; margin-bottom: 0.5rem; letter-spacing: 0.3px;
-  }
-  .site-header p {
-    font-size: 0.88rem; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto;
-  }
-
-  .nav-tabs {
-    display: flex; overflow-x: auto; gap: 4px;
-    background: var(--ink); padding: 0 1.5rem 1rem;
-    border-bottom: 2px solid rgba(255,255,255,0.1); scrollbar-width: none;
-  }
-  .nav-tabs::-webkit-scrollbar { display: none; }
-  .tab-btn {
-    flex-shrink: 0; background: transparent;
-    border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6);
-    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 600;
-    letter-spacing: 0.5px; padding: 8px 18px; border-radius: 100px;
-    cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .tab-btn:hover { border-color: rgba(255,255,255,0.5); color: white; }
-  .tab-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
-
-  .score-bar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.7rem 1.5rem; background: var(--cream);
-    border-bottom: 1.5px solid var(--border);
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
-  }
-  .score-pill {
-    background: var(--ink); color: var(--paper); padding: 5px 16px;
-    border-radius: 100px; font-size: 13px;
-  }
-
-  .section { display: none; }
-  .section.active { display: block; }
-  .content { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-
-  .section-title {
-    font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
-    margin-bottom: 0.35rem; letter-spacing: -0.5px;
-  }
-  .section-desc { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.75rem; line-height: 1.6; }
-
-  .card {
-    background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem;
-  }
-  .info-box {
-    background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px;
-    padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 0.88rem;
-    color: #1e40af; line-height: 1.6;
-  }
-  .stat-strip {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 10px; margin-bottom: 1.75rem;
-  }
-  .stat-card {
-    background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 14px; padding: 0.9rem 1rem; text-align: center;
-  }
-  .stat-num { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--accent2); }
-  .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; line-height: 1.3; }
-
-  .btn {
-    display: inline-block; font-family: 'Syne', sans-serif; font-size: 13px;
-    font-weight: 700; padding: 10px 24px; border-radius: 100px; border: none;
-    cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .btn-primary { background: var(--ink); color: var(--paper); }
-  .btn-primary:hover { background: #2d2d3a; transform: translateY(-1px); }
-  .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--ink); }
-  .btn-outline:hover { border-color: var(--ink); }
-
-  .feedback {
-    display: none; padding: 0.9rem 1.2rem; border-radius: 12px;
-    font-size: 0.88rem; font-weight: 500; margin-top: 1rem; line-height: 1.55;
-  }
-  .feedback.correct { display: block; background: #dcfce7; color: #166534; border: 1.5px solid #86efac; }
-  .feedback.wrong { display: block; background: #fee2e2; color: #991b1b; border: 1.5px solid #fca5a5; }
-
-  .q-counter {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
-  }
-
-  /* EŞLEŞTİRME */
-  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
-  .match-col-title {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem;
-  }
-  .match-item {
-    padding: 11px 14px; border: 2px solid var(--border); border-radius: 12px;
-    font-size: 13px; cursor: pointer; transition: all 0.15s; background: var(--card-bg);
-    min-height: 58px; display: flex; align-items: center; margin-bottom: 9px; line-height: 1.4;
-  }
-  .match-item:hover { border-color: var(--accent2); background: #eff6ff; }
-  .match-item.selected { border-color: var(--accent2); background: #dbeafe; }
-  .match-item.matched { border-color: var(--accent3); background: #dcfce7; cursor: default; }
-  .match-item.wrong-flash { border-color: var(--accent); background: #fee2e2; }
-  .match-label {
-    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px; color: var(--accent);
-    display: block; margin-bottom: 4px;
-  }
-
-  /* BOŞLUK DOLDURMA */
-  .fill-sentence { font-size: 1rem; line-height: 2.3; margin-bottom: 1.5rem; }
-  .fill-blank {
-    display: inline-block; min-width: 130px; border: none;
-    border-bottom: 2.5px solid var(--accent2); background: transparent;
-    font-family: 'Syne', sans-serif; font-size: 0.92rem; font-weight: 600;
-    color: var(--accent2); padding: 2px 8px; outline: none; text-align: center;
-  }
-  .fill-blank:focus { border-color: var(--ink); color: var(--ink); }
-  .fill-blank.correct-answer { border-color: var(--accent3); color: var(--accent3); }
-  .fill-blank.wrong-answer { border-color: var(--accent); color: var(--accent); }
-  .word-bank {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem;
-    padding: 1rem; background: var(--cream); border-radius: 12px;
-    border: 1.5px dashed var(--border);
-  }
-  .word-chip {
-    background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 100px; padding: 5px 14px;
-    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 600;
-    cursor: pointer; transition: all 0.15s; user-select: none;
-  }
-  .word-chip:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-
-  /* TEYİT REHBER ADIMLARI */
-  .teyit-steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.75rem; }
-  .teyit-step {
-    display: flex; gap: 1rem; align-items: flex-start;
-    background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 14px; padding: 1.1rem 1.25rem;
-  }
-  .step-num {
-    flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
-    background: var(--ink); color: var(--paper);
-    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .step-body { flex: 1; }
-  .step-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
-  .step-text { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
-
-  /* TEYİT QUİZ */
-  .tq-question {
-    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
-    margin-bottom: 1rem; line-height: 1.4;
-  }
-  .tq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
-  .tq-opt {
-    padding: 11px 16px; border: 2px solid var(--border); border-radius: 12px;
-    font-size: 0.9rem; cursor: pointer; transition: all 0.15s; background: var(--card-bg); line-height: 1.4;
-  }
-  .tq-opt:hover { border-color: var(--accent2); background: #eff6ff; }
-  .tq-opt.correct { border-color: var(--accent3); background: #dcfce7; cursor: default; }
-  .tq-opt.wrong { border-color: var(--accent); background: #fee2e2; cursor: default; }
-  .tq-opt.disabled { cursor: default; opacity: 0.6; }
-
-  /* SÜRÜKLE-BIRAK */
-  .drag-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
-  .drag-column {
-    min-height: 280px; border: 2px dashed var(--border);
-    border-radius: 14px; padding: 1rem; transition: border-color 0.2s, background 0.2s;
-  }
-  .drag-column.drag-over { border-color: var(--accent2); background: #eff6ff; }
-  .drag-column-title {
-    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
-    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem; border-bottom: 2px solid var(--border);
-  }
-  .drag-item {
-    background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 10px; padding: 10px 14px; font-size: 13px;
-    cursor: grab; margin-bottom: 8px; transition: all 0.15s; line-height: 1.4; user-select: none;
-  }
-  .drag-item:hover { border-color: var(--accent2); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-  .drag-item.dragging { opacity: 0.4; }
-
-  /* SKOR */
-  .score-section { text-align: center; padding: 2rem 0; }
-  .big-score {
-    font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800;
-    letter-spacing: -3px; line-height: 1; margin-bottom: 0.5rem;
-  }
-  .score-label { font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; }
-  .score-breakdown { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-  .score-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 14px; padding: 1rem; text-align: center; }
-  .score-card-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--accent2); }
-  .score-card-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
-  .medal { font-size: 3rem; display: block; margin: 0 auto 0.5rem; }
-
-  @media (max-width: 540px) {
-    .match-grid { grid-template-columns: 1fr; }
-    .drag-zone { grid-template-columns: 1fr; }
-    .stat-strip { grid-template-columns: 1fr 1fr; }
-  }
+:root{
+  --black:#070707;--ink:#111827;--paper:#fffaf0;--soft:#f4ead7;--white:#ffffff;
+  --red:#c8102e;--green:#007a3d;--darkgreen:#064e3b;--amber:#f59e0b;--blue:#0f766e;
+  --muted:#6b7280;--line:rgba(17,24,39,.16);--shadow:0 22px 60px rgba(0,0,0,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at top left,rgba(200,16,46,.14),transparent 30%),radial-gradient(circle at bottom right,rgba(0,122,61,.16),transparent 36%),var(--paper);color:var(--ink);min-height:100vh;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.6),transparent 70%);z-index:-1}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#050505 0%,#151515 46%,#061b12 100%);color:white;padding:34px 18px 26px;border-bottom:6px solid var(--red)}
+.hero::before{content:"";position:absolute;inset:-80px;background:radial-gradient(circle at 20% 30%,rgba(200,16,46,.45),transparent 24%),radial-gradient(circle at 85% 35%,rgba(0,122,61,.42),transparent 28%);filter:blur(18px);opacity:.9}
+.hero-inner{position:relative;max-width:1050px;margin:auto;display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;backdrop-filter:blur(8px)}
+h1{font-family:"Space Grotesk",sans-serif;font-size:clamp(2.1rem,6vw,4.7rem);line-height:.92;letter-spacing:-3px;margin:18px 0 12px}.hero h1 span{color:#f7d7dc}.lead{max-width:680px;color:rgba(255,255,255,.76);font-size:1.02rem;line-height:1.75}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn{border:0;border-radius:18px;padding:12px 18px;font-weight:900;font-family:"Space Grotesk",sans-serif;cursor:pointer;transition:.18s transform,.18s box-shadow,.18s background;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--red);color:white;box-shadow:0 14px 32px rgba(200,16,46,.32)}.btn-dark{background:#111;color:white}.btn-ghost{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2)}.case-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:28px;padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}.case-title{font-family:"Space Grotesk";font-weight:900;font-size:1.1rem}.meter{height:10px;background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden;margin:12px 0}.meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),#fff,var(--red));transition:.4s}.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini{background:rgba(0,0,0,.23);border-radius:16px;padding:12px}.mini b{display:block;font-size:1.35rem;color:#fff}.mini small{color:rgba(255,255,255,.62)}
+.hud{position:sticky;top:0;z-index:20;background:rgba(255,250,240,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.hud-inner{max-width:1050px;margin:auto;display:flex;align-items:center;gap:12px;padding:12px 16px}.tabs{display:flex;gap:8px;overflow:auto;scrollbar-width:none;flex:1}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900;cursor:pointer}.tab.active{background:#111;color:#fff;border-color:#111}.score-pill{background:var(--green);color:white;border-radius:999px;padding:9px 13px;font-weight:900;white-space:nowrap}.progress{height:6px;background:rgba(17,24,39,.1)}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--green));transition:.4s}
+.section{display:none}.section.active{display:block}.wrap{max-width:1050px;margin:auto;padding:28px 16px 70px}.mission-head{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;margin-bottom:18px}.kicker{font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--red)}h2{font-family:"Space Grotesk";font-size:clamp(1.6rem,3.5vw,2.6rem);letter-spacing:-1.5px;line-height:1.05}.desc{color:var(--muted);line-height:1.65;margin-top:8px;max-width:720px}.stamp{border:2px solid var(--red);color:var(--red);border-radius:14px;padding:10px 12px;font-family:"Space Grotesk";font-weight:900;transform:rotate(2deg);background:white}.card{background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:26px;padding:20px;box-shadow:0 10px 34px rgba(17,24,39,.08)}.intel{background:#111;color:white;border-radius:22px;padding:16px;margin:18px 0;display:flex;gap:12px;align-items:flex-start}.intel b{color:#ffe4e9}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.label{font-family:"Space Grotesk";font-weight:900;color:var(--muted);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}.item{background:white;border:2px solid rgba(17,24,39,.14);border-radius:18px;padding:14px 15px;margin-bottom:10px;min-height:58px;display:flex;align-items:center;cursor:pointer;line-height:1.4;transition:.18s}.item:hover{border-color:var(--green);transform:translateY(-1px)}.item.selected{background:#ecfdf5;border-color:var(--green)}.item.matched{background:#dcfce7;border-color:var(--green);cursor:default}.item.bad{background:#fee2e2;border-color:var(--red)}.tag{font-family:"Space Grotesk";font-weight:900;color:var(--red);font-size:11px;margin-right:8px}.feedback{display:none;border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.55;margin-top:14px}.feedback.correct{display:block;background:#dcfce7;color:#14532d;border:1px solid #86efac}.feedback.wrong{display:block;background:#fee2e2;color:#7f1d1d;border:1px solid #fca5a5}.wordbank{display:flex;gap:9px;flex-wrap:wrap;background:var(--soft);border:1px dashed rgba(17,24,39,.25);border-radius:20px;padding:14px;margin-bottom:16px}.chip{border:1px solid var(--line);background:white;border-radius:999px;padding:8px 13px;font-weight:900;font-size:13px;cursor:pointer}.chip:hover{background:#111;color:white}.sentence{line-height:2.45}.blank{min-width:142px;border:0;border-bottom:3px solid var(--green);background:transparent;text-align:center;font-weight:900;padding:4px 7px;outline:none}.blank.ok{color:var(--green);border-color:var(--green)}.blank.no{color:var(--red);border-color:var(--red)}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.step{background:white;border:1px solid var(--line);border-radius:24px;padding:16px}.num{width:34px;height:34px;border-radius:12px;background:#111;color:white;display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:10px}.step h3{font-family:"Space Grotesk";font-size:1rem;margin-bottom:7px}.step p{font-size:.88rem;color:var(--muted);line-height:1.55}.opt{padding:14px 16px;border:2px solid rgba(17,24,39,.14);border-radius:18px;background:white;margin-bottom:10px;cursor:pointer;font-weight:650;line-height:1.45}.opt:hover{border-color:var(--green)}.opt.correct{background:#dcfce7;border-color:var(--green)}.opt.wrong{background:#fee2e2;border-color:var(--red)}.drag-zone{display:grid;grid-template-columns:1fr 1fr;gap:16px}.drop,.source{min-height:280px;border:2px dashed rgba(17,24,39,.23);border-radius:24px;padding:14px;background:rgba(255,255,255,.5)}.drop.over{background:#ecfdf5;border-color:var(--green)}.drag-item{background:white;border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:9px;cursor:grab;line-height:1.45;font-weight:650}.drag-item:hover{box-shadow:0 10px 20px rgba(0,0,0,.08)}.results{text-align:center}.big{font-family:"Space Grotesk";font-size:5rem;font-weight:900;letter-spacing:-5px}.level{display:inline-flex;background:#111;color:white;border-radius:999px;padding:10px 16px;font-weight:900;margin:8px 0 18px}.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.badge-card{background:white;border:1px solid var(--line);border-radius:22px;padding:16px;text-align:center}.badge-card .emoji{font-size:2rem;display:block}.badge-card.locked{opacity:.35;filter:grayscale(1)}
+@media(max-width:780px){.hero-inner,.grid2,.drag-zone{grid-template-columns:1fr}.steps,.badges{grid-template-columns:1fr 1fr}.mission-head{grid-template-columns:1fr}.hud-inner{align-items:flex-start;flex-direction:column}.score-pill{align-self:flex-end}h1{letter-spacing:-2px}.wrap{padding-bottom:48px}}
+@media(max-width:480px){.steps,.badges{grid-template-columns:1fr}.mini-stats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<header class="site-header">
-  <h1>Filistin'in Doğruları</h1>
-  <div class="subtitle">İsrail–Filistin Çatışmasına Dair Yanlış Bilgilere Alternatif Bir Bilgi Platformu</div>
-  <p>Dijital çağda bilgiyi doğrulama becerini oyunlarla geliştir</p>
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="badge">🕵️ Medya Okuryazarlığı Görevi</div>
+      <h1>Dijital Dedektif:<br><span>Filistin Dosyası</span></h1>
+      <p class="lead">Sosyal medyada karşına çıkan görüntüleri, iddiaları ve duygusal başlıkları çözümle. Gerçek, bağlam, kaynak ve manipülasyon izlerini takip ederek kendi doğrulama becerini test et.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="startGame()">▶ Göreve Başla</button>
+        <button class="btn btn-ghost" onclick="showTab('teyit',document.querySelector('[data-tab=teyit]'))">🔎 Önce Rehberi Gör</button>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-title">CANLI DOSYA DURUMU</div>
+      <div class="meter"><span id="hero-meter"></span></div>
+      <div class="mini-stats">
+        <div class="mini"><b id="hero-score">0</b><small>toplam puan</small></div>
+        <div class="mini"><b id="hero-level">Çaylak</b><small>dedektif seviyesi</small></div>
+        <div class="mini"><b id="hero-badge">0/4</b><small>açılan rozet</small></div>
+        <div class="mini"><b>4</b><small>görev bölümü</small></div>
+      </div>
+    </div>
+  </div>
 </header>
-
-<nav class="nav-tabs">
-  <button class="tab-btn active" onclick="showTab('eslestirme',this)">🔗 Eşleştirme</button>
-  <button class="tab-btn" onclick="showTab('bosluk',this)">✏️ Boşluk Doldurma</button>
-  <button class="tab-btn" onclick="showTab('teyit',this)">🔎 Teyit Rehberi</button>
-  <button class="tab-btn" onclick="showTab('surukle',this)">🗂️ Sürükle-Bırak</button>
-  <button class="tab-btn" onclick="showTab('skor',this)">🏆 Skor</button>
-</nav>
-
-<div class="score-bar">
-  <span>Toplam Puan</span>
-  <span class="score-pill" id="total-score">0 Puan</span>
+<div class="hud">
+  <div class="hud-inner">
+    <div class="tabs">
+      <button class="tab active" data-tab="eslestirme" onclick="showTab('eslestirme',this)">1. Kod Çöz</button>
+      <button class="tab" data-tab="bosluk" onclick="showTab('bosluk',this)">2. Terimleri Tamamla</button>
+      <button class="tab" data-tab="teyit" onclick="showTab('teyit',this)">3. Teyit Rehberi</button>
+      <button class="tab" data-tab="surukle" onclick="showTab('surukle',this)">4. Sınıflandır</button>
+      <button class="tab" data-tab="skor" onclick="showTab('skor',this)">🏆 Rozetler</button>
+    </div>
+    <div class="score-pill" id="total-score">0 Puan</div>
+  </div>
+  <div class="progress"><span id="progressbar"></span></div>
 </div>
-
-<!-- BÖLÜM 1: EŞLEŞTİRME -->
-<section class="section active" id="sec-eslestirme">
-  <div class="content">
-    <div class="q-counter">Bölüm 1 / 4</div>
-    <h2 class="section-title">Yanlış Bilgi Türlerini Eşleştir</h2>
-    <p class="section-desc">Sosyal medyada en sık karşılaşılan 7 yanlış bilgi türünü tanımlarıyla eşleştir. Soldaki kavramı seç, ardından sağdaki doğru tanıma tıkla.</p>
-    <div class="info-box">
-      <strong>Biliyor musun?</strong> Türkiye'de 57 milyon aktif sosyal medya kullanıcısının büyük çoğunluğu haberleri sosyal medyadan takip ediyor. Bu durum yanlış bilginin hızla yayılmasını kolaylaştırıyor.
-    </div>
-    <div class="match-grid">
-      <div>
-        <div class="match-col-title">Kavram</div>
-        <div class="match-item" id="m-hatalı" onclick="selectMatch('hatalı','left')"><span><span class="match-label">A</span>Hatalı İlişkilendirme</span></div>
-        <div class="match-item" id="m-uydurma" onclick="selectMatch('uydurma','left')"><span><span class="match-label">B</span>Uydurma</span></div>
-        <div class="match-item" id="m-parodi" onclick="selectMatch('parodi','left')"><span><span class="match-label">C</span>Parodi</span></div>
-        <div class="match-item" id="m-taklit" onclick="selectMatch('taklit','left')"><span><span class="match-label">D</span>Taklit</span></div>
-        <div class="match-item" id="m-carpitma" onclick="selectMatch('carpitma','left')"><span><span class="match-label">E</span>Çarpıtma</span></div>
-        <div class="match-item" id="m-bağlam" onclick="selectMatch('bağlam','left')"><span><span class="match-label">F</span>Bağlamdan Koparma</span></div>
-        <div class="match-item" id="m-manipulasyon" onclick="selectMatch('manipulasyon','left')"><span><span class="match-label">G</span>Manipülasyon</span></div>
-      </div>
-      <div>
-        <div class="match-col-title">Tanım</div>
-        <div class="match-item" id="d-bağlam" onclick="selectMatch('bağlam','right')">Doğru bir bilginin, içinde bulunduğu olaylar ve ilişkilerden koparılarak farklı bir anlatıda sunulması.</div>
-        <div class="match-item" id="d-manipulasyon" onclick="selectMatch('manipulasyon','right')">Seçme, ekleme ve çıkarma yoluyla değiştirilmiş bilgi.</div>
-        <div class="match-item" id="d-uydurma" onclick="selectMatch('uydurma','right')">Tamamen üretilmiş, hiçbir gerçeklik payı taşımayan içerikler.</div>
-        <div class="match-item" id="d-parodi" onclick="selectMatch('parodi','right')">Eğlence ve alaya alma amaçlı, kullanıcıları yanıltma potansiyeli taşıyan içerikler.</div>
-        <div class="match-item" id="d-taklit" onclick="selectMatch('taklit','right')">Bir kişi ya da kurumun imitasyonunun oluşturulduğu içerikler veya hesaplar.</div>
-        <div class="match-item" id="d-hatalı" onclick="selectMatch('hatalı','right')">Bir olayla ilişkilendirilen ancak farklı bir durumu yansıtan fotoğraf, video veya haber başlıkları.</div>
-        <div class="match-item" id="d-carpitma" onclick="selectMatch('carpitma','right')">Gerçek anlamından saptırarak yanlışa sürükleme ve yönlendirme içerikleri.</div>
-      </div>
-    </div>
-    <div id="match-feedback" class="feedback"></div>
-    <div style="display:flex;gap:10px;margin-top:1rem;flex-wrap:wrap;">
-      <button class="btn btn-outline" onclick="resetMatching()">Sıfırla</button>
-      <button class="btn btn-primary" onclick="checkMatching()">Sonuçları Gör →</button>
-    </div>
-    <div id="match-result" style="display:none;margin-top:1.5rem;"></div>
-  </div>
-</section>
-
-<!-- BÖLÜM 2: BOŞLUK DOLDURMA -->
-<section class="section" id="sec-bosluk">
-  <div class="content">
-    <div class="q-counter">Bölüm 2 / 4</div>
-    <h2 class="section-title">Boşlukları Doldur</h2>
-    <p class="section-desc">Kelime bankasından uygun sözcüğe tıkla ya da doğrudan yaz. Dijital medya ve doğrulama süreçleriyle ilgili cümleleri tamamla.</p>
-    <div class="stat-strip">
-      <div class="stat-card"><div class="stat-num">%78</div><div class="stat-label">Haberleri teyit etme ihtiyacı hisseden kullanıcı oranı</div></div>
-      <div class="stat-card"><div class="stat-num">%53</div><div class="stat-label">Haberi farklı sitelerle karşılaştırarak teyit edenler</div></div>
-      <div class="stat-card"><div class="stat-num">%70,4</div><div class="stat-label">Gençlerin en sık kullandığı platform: Instagram</div></div>
-      <div class="stat-card"><div class="stat-num">%47,3</div><div class="stat-label">Haber güvenilirliğinde öne çıkan platform: Twitter/X</div></div>
-    </div>
-    <div class="card">
-      <div class="word-bank">
-        <div class="word-chip" onclick="insertWord('dezenformasyon')">dezenformasyon</div>
-        <div class="word-chip" onclick="insertWord('kaynak')">kaynak</div>
-        <div class="word-chip" onclick="insertWord('eleştirel')">eleştirel</div>
-        <div class="word-chip" onclick="insertWord('bağlam')">bağlam</div>
-        <div class="word-chip" onclick="insertWord('doğrulama')">doğrulama</div>
-        <div class="word-chip" onclick="insertWord('yankı odası')">yankı odası</div>
-        <div class="word-chip" onclick="insertWord('manipülasyon')">manipülasyon</div>
-        <div class="word-chip" onclick="insertWord('üretüketici')">üretüketici</div>
-      </div>
-      <div class="fill-sentence">
-        <p style="margin-bottom:1.2rem;"><b>1.</b> Kasıtlı olarak üretilen ve yayılan yanlış bilgiye <input class="fill-blank" id="f1" placeholder="..." onfocus="setActive('f1')" autocomplete="off"> denir.</p>
-        <p style="margin-bottom:1.2rem;"><b>2.</b> Bir haberi okurken önce <input class="fill-blank" id="f2" placeholder="..." onfocus="setActive('f2')" autocomplete="off"> güvenilirliğini sorgulamalıyız.</p>
-        <p style="margin-bottom:1.2rem;"><b>3.</b> Sosyal medyada yalnızca benzer görüşlerin tekrar ettiği ortama <input class="fill-blank" id="f3" placeholder="..." onfocus="setActive('f3')" autocomplete="off"> denir.</p>
-        <p style="margin-bottom:1.2rem;"><b>4.</b> İçerikleri seçme, ekleme ve çıkarma yoluyla değiştirme işlemine <input class="fill-blank" id="f4" placeholder="..." onfocus="setActive('f4')" autocomplete="off"> denir.</p>
-        <p style="margin-bottom:1.2rem;"><b>5.</b> Medya okuryazarlığı için <input class="fill-blank" id="f5" placeholder="..." onfocus="setActive('f5')" autocomplete="off"> düşünme becerisi geliştirilmelidir.</p>
-        <p style="margin-bottom:0;"><b>6.</b> Hem içerik tüketicisi hem üreticisi olan dijital bireye <input class="fill-blank" id="f6" placeholder="..." onfocus="setActive('f6')" autocomplete="off"> denir.</p>
-      </div>
-    </div>
-    <div id="fill-feedback" class="feedback"></div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <button class="btn btn-outline" onclick="resetFill()">Temizle</button>
-      <button class="btn btn-primary" onclick="checkFill()">Kontrol Et →</button>
-    </div>
-  </div>
-</section>
-
-<!-- BÖLÜM 3: TEYİT REHBERİ -->
-<section class="section" id="sec-teyit">
-  <div class="content">
-    <div class="q-counter">Bölüm 3 / 4</div>
-    <h2 class="section-title">Bir Haberi Nasıl Teyit Ederim?</h2>
-    <p class="section-desc">Dijital Dedektiflik 101 — 4 adımlı gerçeği bulma rehberini öğren, ardından mini quizi çöz.</p>
-    <div class="teyit-steps">
-      <div class="teyit-step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <div class="step-title">"Hız Tuzağına" Düşme — Dur ve Nefes Al</div>
-          <div class="step-text">Bir haber seni çok heyecanlandırdıysa, kızdırdıysa veya "Tam da tahmin ettiğim gibi!" dedirttiyse paylaş butonuna basmadan önce dur. Duyguların tavan yaptığında eleştirel düşünme zayıflar. 10 saniye bekle, sonra karar ver.</div>
-        </div>
-      </div>
-      <div class="teyit-step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <div class="step-title">Görsel Sorgulama — Tersine Mühendislik</div>
-          <div class="step-text">Savaş bölgelerinden geldiği iddia edilen görseller bazen yıllarca önce başka bir yerden alınmış olabilir. Google Lens veya Yandex Images ile görseli arat. Hava durumuna, tabelalardaki dile ve kıyafetlere bak — mevsim ve mekân uyumsuzlukları yalanı ele verir.</div>
-        </div>
-      </div>
-      <div class="teyit-step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">Kaynak Avcılığı</div>
-          <div class="step-text">"Bir arkadaşım gönderdi" veya "WhatsApp grubunda gördüm" bir kaynak değildir. Haberin tarihi var mı? Resmi kurumlar ne diyor? Hesap gerçekten onaylı mı? Teyit.org ve Doğruluk Payı gibi platformları kullan.</div>
-        </div>
-      </div>
-      <div class="teyit-step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <div class="step-title">Yankı Odasından Çık</div>
-          <div class="step-text">Hepimiz kendi görüşümüze yakın hesapları takip ederiz; bu bizi yankı odasına hapseder. Sana zıt düşünen güvenilir bir kaynağın konuyu nasıl ele aldığına bak. Her iki taraf farklı verilerle konuşuyorsa, gerçek çoğunlukla ortada bir yerdedir.</div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div id="tq-container"></div>
-      <div id="tq-feedback" class="feedback"></div>
-      <div id="tq-nav" style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;"></div>
-    </div>
-    <div id="teyit-result" style="display:none;"></div>
-  </div>
-</section>
-
-<!-- BÖLÜM 4: SÜRÜKLE-BIRAK -->
-<section class="section" id="sec-surukle">
-  <div class="content">
-    <div class="q-counter">Bölüm 4 / 4</div>
-    <h2 class="section-title">Güvenilir mi? Değil mi?</h2>
-    <p class="section-desc">İçerikleri sürükleyerek doğru kategoriye yerleştir. Kullanıcıların %78'i haber teyidi ihtiyacı hissediyor — sen de test et!</p>
-    <div class="drag-zone">
-      <div class="drag-column" id="drag-source" style="border-color:#bfdbfe;">
-        <div class="drag-column-title" style="color:var(--accent2);border-color:#bfdbfe;">📦 Sınıflandırılacaklar</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:1rem;">
-        <div class="drag-column" id="drop-guvenilir" ondragover="allowDrop(event)" ondrop="dropItem(event,'guvenilir')" ondragenter="dragEnter(this)" ondragleave="dragLeave(this)">
-          <div class="drag-column-title" style="color:var(--accent3);border-color:#bbf7d0;">✅ Güvenilir İçerik</div>
-        </div>
-        <div class="drag-column" id="drop-supheli" ondragover="allowDrop(event)" ondrop="dropItem(event,'supheli')" ondragenter="dragEnter(this)" ondragleave="dragLeave(this)">
-          <div class="drag-column-title" style="color:#92400e;border-color:#fde68a;">⚠️ Şüpheli / Yanlış</div>
-        </div>
-      </div>
-    </div>
-    <div id="drag-feedback" class="feedback"></div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem;">
-      <button class="btn btn-outline" onclick="resetDrag()">Sıfırla</button>
-      <button class="btn btn-primary" onclick="checkDrag()">Değerlendir →</button>
-    </div>
-  </div>
-</section>
-
-<!-- SKOR -->
-<section class="section" id="sec-skor">
-  <div class="content">
-    <div class="score-section">
-      <span class="medal" id="medal-icon">🏆</span>
-      <div class="big-score" id="final-score">0</div>
-      <div class="score-label">toplam puan</div>
-      <div class="score-breakdown">
-        <div class="score-card"><div class="score-card-num" id="s1">0</div><div class="score-card-label">Eşleştirme</div></div>
-        <div class="score-card"><div class="score-card-num" id="s2">0</div><div class="score-card-label">Boşluk Doldurma</div></div>
-        <div class="score-card"><div class="score-card-num" id="s3">0</div><div class="score-card-label">Teyit Rehberi</div></div>
-        <div class="score-card"><div class="score-card-num" id="s4">0</div><div class="score-card-label">Sınıflandırma</div></div>
-      </div>
-      <div class="card" style="text-align:left;max-width:480px;margin:0 auto 2rem;">
-        <p id="result-text" style="line-height:1.7;font-size:0.92rem;"></p>
-      </div>
-      <button class="btn btn-primary" onclick="resetAll()">🔄 Baştan Başla</button>
-    </div>
-  </div>
-</section>
-
+<section class="section active" id="sec-eslestirme"><div class="wrap">
+  <div class="mission-head"><div><div class="kicker">Görev 01 / Kod Çözme</div><h2>Yanlış bilgi türlerini delillerle eşleştir.</h2><p class="desc">Kavramı seç, ardından doğru tanımı işaretle. Her doğru eşleşme dosyaya 10 puan kazandırır.</p></div><div class="stamp">AKTİF DOSYA</div></div>
+  <div class="intel">💡 <div><b>Saha Notu:</b> Eski bir görüntünün yeni bir olay gibi sunulması çoğu zaman “bağlamdan koparma”dır. Paylaşmadan önce tarih, yer ve ilk kaynak izini sür.</div></div>
+  <div class="grid2 card"><div><div class="label">Kavramlar</div>
+    <div class="item" id="m-hatali" onclick="selectMatch('hatali','left')"><span class="tag">A</span>Hatalı İlişkilendirme</div>
+    <div class="item" id="m-uydurma" onclick="selectMatch('uydurma','left')"><span class="tag">B</span>Uydurma</div>
+    <div class="item" id="m-parodi" onclick="selectMatch('parodi','left')"><span class="tag">C</span>Parodi</div>
+    <div class="item" id="m-taklit" onclick="selectMatch('taklit','left')"><span class="tag">D</span>Taklit</div>
+    <div class="item" id="m-carpitma" onclick="selectMatch('carpitma','left')"><span class="tag">E</span>Çarpıtma</div>
+    <div class="item" id="m-baglam" onclick="selectMatch('baglam','left')"><span class="tag">F</span>Bağlamdan Koparma</div>
+    <div class="item" id="m-manipulasyon" onclick="selectMatch('manipulasyon','left')"><span class="tag">G</span>Manipülasyon</div>
+  </div><div><div class="label">Deliller</div>
+    <div class="item" id="d-baglam" onclick="selectMatch('baglam','right')">Doğru bilginin olay ve ilişkilerinden koparılarak farklı anlatıda sunulması.</div>
+    <div class="item" id="d-manipulasyon" onclick="selectMatch('manipulasyon','right')">Seçme, ekleme ve çıkarma yoluyla değiştirilmiş bilgi.</div>
+    <div class="item" id="d-uydurma" onclick="selectMatch('uydurma','right')">Tamamen üretilmiş, gerçeklik payı taşımayan içerik.</div>
+    <div class="item" id="d-parodi" onclick="selectMatch('parodi','right')">Eğlence amacı taşısa da yanıltma potansiyeli olan içerik.</div>
+    <div class="item" id="d-taklit" onclick="selectMatch('taklit','right')">Kişi veya kurum imitasyonu yapan hesap ya da içerik.</div>
+    <div class="item" id="d-hatali" onclick="selectMatch('hatali','right')">Başka bir olayı yansıtan fotoğraf, video veya başlığın yanlış olayla ilişkilendirilmesi.</div>
+    <div class="item" id="d-carpitma" onclick="selectMatch('carpitma','right')">Gerçek anlamından saptırarak yanlışa yönlendirme.</div>
+  </div></div>
+  <div id="match-feedback" class="feedback"></div><div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-dark" onclick="checkMatching()">Dosyayı Puanla →</button><button class="btn" onclick="resetMatching()">Sıfırla</button></div>
+</div></section>
+<section class="section" id="sec-bosluk"><div class="wrap">
+  <div class="mission-head"><div><div class="kicker">Görev 02 / Terim Avı</div><h2>Doğrulama sözlüğünü tamamla.</h2><p class="desc">Kelime kartlarına tıkla veya doğrudan yaz. Her doğru cevap 15 puan.</p></div><div class="stamp">SÖZLÜK</div></div>
+  <div class="card"><div class="wordbank"><span class="chip" onclick="insertWord('dezenformasyon')">dezenformasyon</span><span class="chip" onclick="insertWord('kaynak')">kaynak</span><span class="chip" onclick="insertWord('eleştirel')">eleştirel</span><span class="chip" onclick="insertWord('bağlam')">bağlam</span><span class="chip" onclick="insertWord('yankı odası')">yankı odası</span><span class="chip" onclick="insertWord('manipülasyon')">manipülasyon</span><span class="chip" onclick="insertWord('üretüketici')">üretüketici</span></div>
+  <div class="sentence">
+    <p><b>1.</b> Kasıtlı üretilen yanlış bilgiye <input class="blank" id="f1" onfocus="setActive('f1')" autocomplete="off"> denir.</p>
+    <p><b>2.</b> Bir haberde önce <input class="blank" id="f2" onfocus="setActive('f2')" autocomplete="off"> güvenilirliği sorgulanır.</p>
+    <p><b>3.</b> Benzer görüşlerin tekrar ettiği ortama <input class="blank" id="f3" onfocus="setActive('f3')" autocomplete="off"> denir.</p>
+    <p><b>4.</b> İçeriği seçme, ekleme, çıkarma yoluyla değiştirme <input class="blank" id="f4" onfocus="setActive('f4')" autocomplete="off"> olarak bilinir.</p>
+    <p><b>5.</b> Medya okuryazarlığında <input class="blank" id="f5" onfocus="setActive('f5')" autocomplete="off"> düşünme becerisi önemlidir.</p>
+    <p><b>6.</b> Hem içerik tüketicisi hem üreticisi olan birey <input class="blank" id="f6" onfocus="setActive('f6')" autocomplete="off"> olarak adlandırılır.</p>
+  </div></div><div id="fill-feedback" class="feedback"></div><div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-dark" onclick="checkFill()">Kontrol Et →</button><button class="btn" onclick="resetFill()">Temizle</button></div>
+</div></section>
+<section class="section" id="sec-teyit"><div class="wrap">
+ <div class="mission-head"><div><div class="kicker">Görev 03 / Teyit Protokolü</div><h2>Dört adımlı dijital dedektif rehberi.</h2><p class="desc">Önce protokolü oku, sonra vaka sorularını cevapla. Her doğru cevap 20 puan.</p></div><div class="stamp">PROTOKOL</div></div>
+ <div class="steps"><div class="step"><div class="num">1</div><h3>Dur</h3><p>Seni öfkelendiren veya heyecanlandıran içerikte paylaşmadan önce bekle.</p></div><div class="step"><div class="num">2</div><h3>Görseli ara</h3><p>Google Lens/Yandex ile ilk kullanım tarihini ve yeri araştır.</p></div><div class="step"><div class="num">3</div><h3>Kaynağı izle</h3><p>Yazar, tarih, kurum ve resmi açıklama var mı kontrol et.</p></div><div class="step"><div class="num">4</div><h3>Yankıdan çık</h3><p>Farklı güvenilir kaynakların konuyu nasıl ele aldığını karşılaştır.</p></div></div>
+ <div class="card"><div id="tq-container"></div><div id="tq-feedback" class="feedback"></div><div id="tq-nav" style="margin-top:14px"></div></div>
+</div></section>
+<section class="section" id="sec-surukle"><div class="wrap">
+ <div class="mission-head"><div><div class="kicker">Görev 04 / İçerik Tarama</div><h2>Güvenilir mi, şüpheli mi?</h2><p class="desc">Kartları doğru bölgeye sürükle. Dokunmatik cihazlarda kartı basılı tutup hedefe bırak.</p></div><div class="stamp">TARAMA</div></div>
+ <div class="drag-zone"><div class="source" id="drag-source"><div class="label">Sınıflandırılacak kartlar</div></div><div style="display:grid;gap:16px"><div class="drop" id="drop-guvenilir" ondragover="allowDrop(event)" ondrop="dropItem(event,'guvenilir')" ondragenter="dragEnter(this)" ondragleave="dragLeave(this)"><div class="label" style="color:var(--green)">✅ Güvenilir</div></div><div class="drop" id="drop-supheli" ondragover="allowDrop(event)" ondrop="dropItem(event,'supheli')" ondragenter="dragEnter(this)" ondragleave="dragLeave(this)"><div class="label" style="color:var(--red)">⚠️ Şüpheli / Yanlış</div></div></div></div>
+ <div id="drag-feedback" class="feedback"></div><div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-dark" onclick="checkDrag()">Taramayı Bitir →</button><button class="btn" onclick="resetDrag()">Sıfırla</button></div>
+</div></section>
+<section class="section" id="sec-skor"><div class="wrap results">
+ <div class="kicker">Final Raporu</div><h2>Dedektif karnen hazır.</h2><div class="big" id="final-score">0</div><div class="level" id="level">Seviye: Çaylak</div><p class="desc" style="margin:auto" id="result-text">Görevleri tamamladıkça rozetlerin açılacak.</p>
+ <div class="badges"><div class="badge-card locked" id="b1"><span class="emoji">🧩</span><b>Kod Çözücü</b><p>5+ eşleşme</p></div><div class="badge-card locked" id="b2"><span class="emoji">📚</span><b>Sözlük Ustası</b><p>4+ doğru</p></div><div class="badge-card locked" id="b3"><span class="emoji">🔎</span><b>Teyitçi</b><p>3+ soru</p></div><div class="badge-card locked" id="b4"><span class="emoji">🛡️</span><b>Bilgi Kalkanı</b><p>6+ kart</p></div></div>
+ <button class="btn btn-primary" onclick="resetAll()">🔄 Baştan Başla</button>
+</div></section>
 <script>
-const state = {
-  scores:{eslestirme:0,bosluk:0,teyit:0,surukle:0},
-  matchSelected:null,matchSide:null,matchedPairs:[],
-  fillActive:null,tqIndex:0,tqResults:[]
-};
-let dragPlacements={},touchDragEl=null,touchClone=null;
-
-function updateScoreBar(){
-  const t=Object.values(state.scores).reduce((a,b)=>a+b,0);
-  document.getElementById('total-score').textContent=t+' Puan';
-}
-
-function showTab(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sec-'+id).classList.add('active');
-  btn.classList.add('active');
-  if(id==='skor') updateSkorPanel();
-  if(id==='teyit') renderTQ();
-  if(id==='surukle') renderDrag();
-}
-
-// EŞLEŞTİRME
-function selectMatch(id,side){
-  if(state.matchedPairs.includes(id)) return;
-  const el=side==='left'?document.getElementById('m-'+id):document.getElementById('d-'+id);
-  if(el.classList.contains('matched')) return;
-  if(state.matchSelected===null){
-    state.matchSelected=id; state.matchSide=side; el.classList.add('selected');
-  } else {
-    if(state.matchSide===side){
-      document.querySelectorAll('.match-item').forEach(e=>e.classList.remove('selected'));
-      state.matchSelected=id; el.classList.add('selected'); return;
-    }
-    const prevId=state.matchSelected,prevSide=state.matchSide;
-    const prevEl=prevSide==='left'?document.getElementById('m-'+prevId):document.getElementById('d-'+prevId);
-    if(prevId===id){
-      prevEl.classList.remove('selected'); prevEl.classList.add('matched');
-      el.classList.add('matched'); state.matchedPairs.push(id);
-      showMF('✅ Doğru! "'+id.charAt(0).toUpperCase()+id.slice(1)+'" eşleşti.',true);
-    } else {
-      prevEl.classList.remove('selected');
-      prevEl.classList.add('wrong-flash'); el.classList.add('wrong-flash');
-      setTimeout(()=>{prevEl.classList.remove('wrong-flash');el.classList.remove('wrong-flash');},700);
-      showMF('❌ Yanlış eşleşme. Tekrar dene.',false);
-    }
-    state.matchSelected=null; state.matchSide=null;
-  }
-}
-function showMF(msg,ok){
-  const fb=document.getElementById('match-feedback');
-  fb.textContent=msg; fb.className='feedback '+(ok?'correct':'wrong');
-}
-function checkMatching(){
-  const found=state.matchedPairs.length,pts=found*10;
-  state.scores.eslestirme=pts; updateScoreBar();
-  const res=document.getElementById('match-result');
-  res.style.display='block';
-  res.innerHTML=`<div class="feedback ${found===7?'correct':'wrong'}">${found===7?'🎉 Mükemmel! Tüm ':'📌 '}${found}/7 çifti doğru eşleştirdin. +${pts} puan!${found<7?'<br>Kalan çiftleri bulmaya devam et.':''}</div>`;
-}
-function resetMatching(){
-  state.matchSelected=null;state.matchSide=null;state.matchedPairs=[];
-  document.querySelectorAll('.match-item').forEach(e=>e.classList.remove('selected','matched','wrong-flash'));
-  document.getElementById('match-feedback').className='feedback';
-  document.getElementById('match-result').style.display='none';
-  state.scores.eslestirme=0; updateScoreBar();
-}
-
-// BOŞLUK DOLDURMA
-const fillAnswers={f1:'dezenformasyon',f2:'kaynak',f3:'yankı odası',f4:'manipülasyon',f5:'eleştirel',f6:'üretüketici'};
-function setActive(id){state.fillActive=id;}
-function insertWord(w){if(state.fillActive){document.getElementById(state.fillActive).value=w;}}
-function checkFill(){
-  let c=0;
-  for(const[id,ans]of Object.entries(fillAnswers)){
-    const el=document.getElementById(id),val=el.value.trim().toLowerCase();
-    const ok=val===ans.toLowerCase()||(ans.toLowerCase().includes(val)&&val.length>3);
-    el.classList.remove('correct-answer','wrong-answer');
-    el.classList.add(ok?'correct-answer':'wrong-answer');
-    if(ok)c++;
-  }
-  const pts=c*15; state.scores.bosluk=pts; updateScoreBar();
-  const fb=document.getElementById('fill-feedback');
-  fb.textContent=`${c}/6 cevap doğru! +${pts} puan kazandın.`;
-  fb.className='feedback '+(c>=4?'correct':'wrong');
-}
-function resetFill(){
-  for(const id of Object.keys(fillAnswers)){const el=document.getElementById(id);el.value='';el.classList.remove('correct-answer','wrong-answer');}
-  document.getElementById('fill-feedback').className='feedback';
-  state.fillActive=null; state.scores.bosluk=0; updateScoreBar();
-}
-
-// TEYİT QUİZ
-const tqQ=[
-  {q:'Bir haberi gördüğünde ilk ne yapmalısın?',
-   opts:['Hemen arkadaşlarınla paylaş, haber eskimeden.','Dur, duygu düzeyini kontrol et; haberin seni çok heyecanlandırıp heyecanlandırmadığını fark et.','Haberin kaç kez beğenildiğine bak.','Haberi farklı dillere çevirerek kontrol et.'],
-   correct:1,exp:'Doğru! "Hız tuzağı" dijital bilgi kirliliğinin en büyük silahıdır. Duygular tavan yaptığında eleştirel düşünme zayıflar.'},
-  {q:'Araştırmalara göre gençler haber güvenilirliği söz konusu olduğunda hangi platformu tercih ediyor?',
-   opts:['Instagram (%70,4 kullanım oranıyla)','Facebook (köklü geçmişiyle)','Twitter/X (%47,3 güven oranıyla)','TikTok (dinamik içerikleriyle)'],
-   correct:2,exp:'Doğru! Gençlerin %70,4\'ü en sık Instagram kullansa da, haber güvenilirliğinde Twitter/X %47,3 ile öne çıkıyor.'},
-  {q:'"Bir arkadaşım WhatsApp\'ta gönderdi" ifadesi haber kaynağı olarak kabul edilebilir mi?',
-   opts:['Evet, arkadaş güvenilir bir kaynaktır.','Sadece grup üye sayısı 100\'ü geçiyorsa evet.','Hayır; resmi kurum, tarih ve yazar bilgisi olmayan içerik kaynak sayılmaz.','Evet, çünkü sosyal medyada çok paylaşılmış olmalı.'],
-   correct:2,exp:'Doğru! Kaynak güvenilirliği için tarih, yazar kimliği ve resmi kurum doğrulaması gerekir. WhatsApp zinciri hiçbirini sağlamaz.'},
-  {q:'"Yankı odası" kavramı neyi ifade eder?',
-   opts:['Ses yalıtımlı podcast stüdyosu','Yalnızca kendi görüşlerimizi destekleyen içeriklerle çevrildiğimiz sosyal medya ortamı','Haberleri birden fazla kaynakla karşılaştırma yöntemi','Profesyonel haber doğrulama platformu'],
-   correct:1,exp:'Doğru! Yankı odası, algoritmaların bizi yalnızca kendi görüşümüze uygun içeriklerle beslemesi sonucu oluşan filtre balonudur.'},
-  {q:'Doğru bilginin temel özelliği hangisidir?',
-   opts:['Çok sayıda beğeni ve paylaşım almış olması','Ünlü bir hesaptan gelmiş olması','Gerçek olaylara dayanması, güvenilir kaynak göstermesi ve bağlamından koparılmadan sunulması','Kısa ve dikkat çekici bir başlığa sahip olması'],
-   correct:2,exp:'Doğru! Güvenilir bilgi; gerçek olaylara dayanır, açık kaynaklara referans verir, bağlamından koparılmaz ve kanıtlanabilir veriler içerir.'}
-];
-
-function renderTQ(){
-  const idx=state.tqIndex;
-  if(idx>=tqQ.length){showTeyitResult();return;}
-  const q=tqQ[idx];
-  document.getElementById('tq-container').innerHTML=`
-    <div class="tq-question">${idx+1}/${tqQ.length} — ${q.q}</div>
-    <div class="tq-options">${q.opts.map((o,i)=>`<div class="tq-opt" id="tqo-${i}" onclick="answerTQ(${i})">${o}</div>`).join('')}</div>`;
-  document.getElementById('tq-feedback').className='feedback';
-  document.getElementById('tq-nav').innerHTML='';
-}
-function answerTQ(chosen){
-  const idx=state.tqIndex,q=tqQ[idx],ok=chosen===q.correct;
-  state.tqResults[idx]=ok;
-  if(ok) state.scores.teyit=(state.scores.teyit||0)+20;
-  updateScoreBar();
-  document.querySelectorAll('.tq-opt').forEach((el,i)=>{
-    el.classList.add('disabled');
-    if(i===q.correct)el.classList.add('correct');
-    else if(i===chosen&&!ok)el.classList.add('wrong');
-  });
-  const fb=document.getElementById('tq-feedback');
-  fb.textContent=(ok?'✅ ':'❌ ')+q.exp; fb.className='feedback '+(ok?'correct':'wrong');
-  document.getElementById('tq-nav').innerHTML=`<button class="btn btn-primary" onclick="nextTQ()">${idx+1<tqQ.length?'Sonraki Soru →':'🏁 Sonuçları Gör'}</button>`;
-}
-function nextTQ(){state.tqIndex++;renderTQ();}
-function showTeyitResult(){
-  const c=state.tqResults.filter(Boolean).length;
-  document.getElementById('tq-container').innerHTML='';
-  document.getElementById('tq-feedback').className='feedback';
-  document.getElementById('tq-nav').innerHTML='';
-  const res=document.getElementById('teyit-result');
-  res.style.display='block';
-  res.innerHTML=`<div class="feedback ${c>=4?'correct':'wrong'}"><strong>📊 Teyit Skoru: ${c}/${tqQ.length}</strong><br>${c===5?'Mükemmel! Dijital dedektiflik becerin üst düzey.':c>=3?'İyi! Biraz daha pratikle zirveye ulaşırsın.':'Teyit rehberini tekrar incele, bilgileri pekiştir.'}<br><br><button class="btn btn-outline" onclick="resetTeyit()">🔄 Tekrar Çöz</button></div>`;
-}
-function resetTeyit(){
-  state.tqIndex=0;state.tqResults=[];state.scores.teyit=0;updateScoreBar();
-  document.getElementById('teyit-result').style.display='none';renderTQ();
-}
-
-// SÜRÜKLE-BIRAK
-const dragData=[
-  {id:'d1',text:'BBC News resmi sitesinde, uzman görüşlerine dayanan tarihli haber',cat:'guvenilir'},
-  {id:'d2',text:'"Paylaş, yoksa başına kötü şey gelir!" zincir mesajı',cat:'supheli'},
-  {id:'d3',text:'WHO\'nun resmi hesabından yapılan, tarih ve kaynaklı açıklama',cat:'guvenilir'},
-  {id:'d4',text:'Tarih, yazar ve kaynak bilgisi olmayan viral fotoğraf',cat:'supheli'},
-  {id:'d5',text:'Hakemli bilimsel dergide yayımlanan ve atıf verilen araştırma',cat:'guvenilir'},
-  {id:'d6',text:'"Gizli bilgiler! Hükümet bunu istemiyor" başlıklı anonim video',cat:'supheli'},
-  {id:'d7',text:'Satire mizah hesabından bağlamından koparılarak paylaşılan içerik',cat:'supheli'},
-  {id:'d8',text:'Birden fazla güvenilir ajans tarafından doğrulanan resmi açıklama',cat:'guvenilir'},
-];
-
-function renderDrag(){
-  dragPlacements={};
-  const src=document.getElementById('drag-source'),g=document.getElementById('drop-guvenilir'),s=document.getElementById('drop-supheli');
-  src.innerHTML='<div class="drag-column-title" style="color:var(--accent2);border-color:#bfdbfe;">📦 Sınıflandırılacaklar</div>';
-  g.innerHTML='<div class="drag-column-title" style="color:var(--accent3);border-color:#bbf7d0;">✅ Güvenilir İçerik</div>';
-  s.innerHTML='<div class="drag-column-title" style="color:#92400e;border-color:#fde68a;">⚠️ Şüpheli / Yanlış</div>';
-  dragData.forEach(item=>{
-    const el=document.createElement('div');
-    el.className='drag-item';el.id='di-'+item.id;el.draggable=true;el.textContent=item.text;
-    el.addEventListener('dragstart',e=>{e.dataTransfer.setData('id',item.id);el.classList.add('dragging');});
-    el.addEventListener('dragend',()=>el.classList.remove('dragging'));
-    el.addEventListener('touchstart',handleTouchStart,{passive:true});
-    el.addEventListener('touchmove',handleTouchMove,{passive:false});
-    el.addEventListener('touchend',handleTouchEnd,{passive:true});
-    src.appendChild(el);
-  });
-}
-function allowDrop(e){e.preventDefault();}
-function dragEnter(el){el.classList.add('drag-over');}
-function dragLeave(el){el.classList.remove('drag-over');}
-function dropItem(e,cat){
-  e.preventDefault();e.currentTarget.classList.remove('drag-over');
-  const id=e.dataTransfer.getData('id'),el=document.getElementById('di-'+id);
-  if(el){e.currentTarget.appendChild(el);dragPlacements[id]=cat;}
-}
-function handleTouchStart(e){
-  touchDragEl=e.currentTarget;const rect=touchDragEl.getBoundingClientRect();
-  touchClone=touchDragEl.cloneNode(true);
-  touchClone.style.cssText=`position:fixed;left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;opacity:0.7;z-index:9999;pointer-events:none;`;
-  document.body.appendChild(touchClone);
-}
-function handleTouchMove(e){
-  e.preventDefault();const t=e.touches[0];
-  if(touchClone){touchClone.style.left=t.clientX-80+'px';touchClone.style.top=t.clientY-30+'px';}
-}
-function handleTouchEnd(e){
-  if(touchClone){document.body.removeChild(touchClone);touchClone=null;}
-  const t=e.changedTouches[0],target=document.elementFromPoint(t.clientX,t.clientY);
-  const dz=target?target.closest('#drop-guvenilir,#drop-supheli'):null;
-  if(dz&&touchDragEl){const cat=dz.id==='drop-guvenilir'?'guvenilir':'supheli';dz.appendChild(touchDragEl);dragPlacements[touchDragEl.id.replace('di-','')]=cat;}
-  touchDragEl=null;
-}
-function checkDrag(){
-  if(Object.keys(dragPlacements).length===0){
-    const fb=document.getElementById('drag-feedback');fb.textContent='Lütfen önce içerikleri sürükleyerek yerleştir!';fb.className='feedback wrong';return;
-  }
-  let c=0;
-  dragData.forEach(item=>{
-    const el=document.getElementById('di-'+item.id);if(!el)return;
-    if(dragPlacements[item.id]===item.cat){c++;el.style.border='2px solid var(--accent3)';el.style.background='#dcfce7';}
-    else{el.style.border='2px solid var(--accent)';el.style.background='#fee2e2';}
-  });
-  const pts=c*10;state.scores.surukle=pts;updateScoreBar();
-  const fb=document.getElementById('drag-feedback');
-  fb.textContent=`${c}/${dragData.length} içeriği doğru sınıflandırdın! +${pts} puan.`;
-  fb.className='feedback '+(c>=6?'correct':'wrong');
-}
-function resetDrag(){state.scores.surukle=0;updateScoreBar();document.getElementById('drag-feedback').className='feedback';renderDrag();}
-
-// SKOR PANELİ
-function updateSkorPanel(){
-  const s=state.scores,total=Object.values(s).reduce((a,b)=>a+b,0);
-  document.getElementById('final-score').textContent=total;
-  document.getElementById('s1').textContent=s.eslestirme;
-  document.getElementById('s2').textContent=s.bosluk;
-  document.getElementById('s3').textContent=s.teyit;
-  document.getElementById('s4').textContent=s.surukle;
-  document.getElementById('total-score').textContent=total+' Puan';
-  let medal,msg;
-  if(total>=200){medal='🥇';msg='Mükemmel! Gerçek bir dijital dedektifsin. Yanlış bilgilere karşı çevreni de bilinçlendir!';}
-  else if(total>=130){medal='🥈';msg='Çok iyi! Medya okuryazarlığın güçlü. Biraz daha pratikle zirveye ulaşırsın.';}
-  else if(total>=70){medal='🥉';msg='İyi başlangıç! Bölümleri tekrar oynayarak becerilerini güçlendirebilirsin.';}
-  else{medal='🔍';msg='Henüz başlangıç aşamasındasın. Her bölüm sana yeni bir beceri katacak!';}
-  document.getElementById('medal-icon').textContent=medal;
-  document.getElementById('result-text').textContent=msg;
-}
-function resetAll(){
-  state.scores={eslestirme:0,bosluk:0,teyit:0,surukle:0};
-  state.matchSelected=null;state.matchSide=null;state.matchedPairs=[];
-  state.fillActive=null;state.tqIndex=0;state.tqResults=[];
-  resetMatching();resetFill();
-  document.getElementById('teyit-result').style.display='none';
-  updateScoreBar();
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sec-eslestirme').classList.add('active');
-  document.querySelectorAll('.tab-btn')[0].classList.add('active');
-}
-
-renderDrag();
-renderTQ();
+const state={scores:{eslestirme:0,bosluk:0,teyit:0,surukle:0},matchSelected:null,matchSide:null,matchedPairs:[],fillActive:null,tqIndex:0,tqResults:[],last:{match:0,fill:0,drag:0}};let dragPlacements={},touchDragEl=null,touchClone=null;
+function total(){return Object.values(state.scores).reduce((a,b)=>a+b,0)}function levelName(t){if(t>=230)return 'Başdedektif';if(t>=170)return 'Analist';if(t>=90)return 'Gözlemci';return 'Çaylak'}
+function refresh(){let t=total();document.getElementById('total-score').textContent=t+' Puan';document.getElementById('hero-score').textContent=t;document.getElementById('hero-level').textContent=levelName(t);document.getElementById('hero-meter').style.width=Math.min(100,t/270*100)+'%';document.getElementById('progressbar').style.width=Math.min(100,t/270*100)+'%';let b=[state.last.match>=5,state.last.fill>=4,state.tqResults.filter(Boolean).length>=3,state.last.drag>=6].filter(Boolean).length;document.getElementById('hero-badge').textContent=b+'/4';}
+function startGame(){document.getElementById('sec-eslestirme').scrollIntoView({behavior:'smooth'})}function showTab(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');if(btn)btn.classList.add('active');if(id==='teyit')renderTQ();if(id==='surukle')renderDrag();if(id==='skor')updateSkorPanel();}
+function selectMatch(id,side){if(state.matchedPairs.includes(id))return;let el=document.getElementById((side==='left'?'m-':'d-')+id);if(state.matchSelected===null){state.matchSelected=id;state.matchSide=side;el.classList.add('selected');return}if(state.matchSide===side){document.querySelectorAll('.item').forEach(e=>e.classList.remove('selected'));state.matchSelected=id;state.matchSide=side;el.classList.add('selected');return}let prev=document.getElementById((state.matchSide==='left'?'m-':'d-')+state.matchSelected);if(state.matchSelected===id){prev.classList.remove('selected');prev.classList.add('matched');el.classList.add('matched');state.matchedPairs.push(id);showMsg('match-feedback','✅ Delil doğrulandı. Eşleşme doğru.',1)}else{prev.classList.remove('selected');prev.classList.add('bad');el.classList.add('bad');setTimeout(()=>{prev.classList.remove('bad');el.classList.remove('bad')},650);showMsg('match-feedback','❌ Bu iz yanlış kapıya çıkıyor. Tekrar dene.',0)}state.matchSelected=null;state.matchSide=null;}
+function showMsg(id,msg,ok){let f=document.getElementById(id);f.textContent=msg;f.className='feedback '+(ok?'correct':'wrong')}
+function checkMatching(){let c=state.matchedPairs.length;state.last.match=c;state.scores.eslestirme=c*10;refresh();showMsg('match-feedback',`${c}/7 eşleşme doğru. Dosyaya +${c*10} puan işlendi.`,c>=5)}function resetMatching(){state.matchSelected=null;state.matchSide=null;state.matchedPairs=[];document.querySelectorAll('.item').forEach(e=>e.classList.remove('selected','matched','bad'));document.getElementById('match-feedback').className='feedback';state.scores.eslestirme=0;state.last.match=0;refresh()}
+const fillAnswers={f1:'dezenformasyon',f2:'kaynak',f3:'yankı odası',f4:'manipülasyon',f5:'eleştirel',f6:'üretüketici'};function setActive(id){state.fillActive=id}function insertWord(w){if(state.fillActive)document.getElementById(state.fillActive).value=w}
+function checkFill(){let c=0;Object.entries(fillAnswers).forEach(([id,ans])=>{let el=document.getElementById(id),v=el.value.trim().toLowerCase();let ok=v===ans.toLowerCase();el.classList.remove('ok','no');el.classList.add(ok?'ok':'no');if(ok)c++});state.last.fill=c;state.scores.bosluk=c*15;refresh();showMsg('fill-feedback',`${c}/6 terim doğru. +${c*15} puan kazandın.`,c>=4)}function resetFill(){Object.keys(fillAnswers).forEach(id=>{let el=document.getElementById(id);el.value='';el.classList.remove('ok','no')});document.getElementById('fill-feedback').className='feedback';state.fillActive=null;state.scores.bosluk=0;state.last.fill=0;refresh()}
+const tqQ=[{q:'Bir içerik seni çok öfkelendirdiyse ilk hamle ne olmalı?',opts:['Hemen paylaşmak','Durup duygu etkisini fark etmek','Yorumlara bakmak','Daha sert başlık yazmak'],correct:1,exp:'Duygusal tepki arttığında yanlış bilgiye inanma ve paylaşma riski yükselir.'},{q:'Bir görselin eski olup olmadığını anlamak için en uygun yöntem hangisi?',opts:['Beğeni sayısına bakmak','Tersine görsel arama yapmak','Yorumları okumak','Ekran görüntüsü almak'],correct:1,exp:'Tersine görsel arama, görselin önceki kullanımlarını bulmada en etkili ilk adımdır.'},{q:'WhatsApp zincir mesajı neden kaynak sayılmaz?',opts:['Çünkü kısa yazılır','Çünkü yazar, tarih ve doğrulanabilir kaynak çoğu zaman yoktur','Çünkü telefondan gelir','Çünkü herkes okur'],correct:1,exp:'Kaynak; izlenebilir, doğrulanabilir ve bağlamı açık olmalıdır.'},{q:'Yankı odasından çıkmak ne demektir?',opts:['Sadece aynı görüşteki hesapları takip etmek','Farklı güvenilir kaynakları karşılaştırmak','Telefonu sessize almak','Haberi hiç okumamak'],correct:1,exp:'Farklı güvenilir kaynakları karşılaştırmak bağlamı güçlendirir.'},{q:'Güvenilir bilginin temel işareti nedir?',opts:['Çarpıcı başlık','Çok paylaşım','Kaynak, tarih, bağlam ve kanıt','Anonim iddia'],correct:2,exp:'Güvenilir bilgi kanıtlanabilir kaynak ve açık bağlamla desteklenir.'}];
+function renderTQ(){let i=state.tqIndex;if(i>=tqQ.length){document.getElementById('tq-container').innerHTML='<h3>Vaka soruları tamamlandı.</h3>';document.getElementById('tq-nav').innerHTML='<button class="btn btn-dark" onclick="showTab(\'skor\',document.querySelector(\'[data-tab=skor]\'))">Final Raporuna Git →</button>';return}let q=tqQ[i];document.getElementById('tq-container').innerHTML=`<h3 style="font-family:Space Grotesk;margin-bottom:14px">${i+1}/${tqQ.length} — ${q.q}</h3>${q.opts.map((o,k)=>`<div class="opt" onclick="answerTQ(${k})" id="tqo-${k}">${o}</div>`).join('')}`;document.getElementById('tq-feedback').className='feedback';document.getElementById('tq-nav').innerHTML=''}
+function answerTQ(ch){let i=state.tqIndex,q=tqQ[i],ok=ch===q.correct;state.tqResults[i]=ok;state.scores.teyit=state.tqResults.filter(Boolean).length*20;document.querySelectorAll('.opt').forEach((el,k)=>{if(k===q.correct)el.classList.add('correct');else if(k===ch&&!ok)el.classList.add('wrong');el.style.pointerEvents='none'});refresh();showMsg('tq-feedback',(ok?'✅ ':'❌ ')+q.exp,ok);document.getElementById('tq-nav').innerHTML=`<button class="btn btn-dark" onclick="state.tqIndex++;renderTQ()">${i+1<tqQ.length?'Sonraki Vaka →':'Raporu Tamamla →'}</button>`}
+const dragData=[{id:'d1',text:'Resmi kurum açıklaması, tarih ve kaynak bağlantısıyla verilmiş haber',cat:'guvenilir'},{id:'d2',text:'“Paylaşmazsan herkes kandırılacak!” diyen zincir mesaj',cat:'supheli'},{id:'d3',text:'Birden fazla güvenilir ajansın doğruladığı açıklama',cat:'guvenilir'},{id:'d4',text:'Tarih, yazar ve ilk kaynak bilgisi olmayan viral fotoğraf',cat:'supheli'},{id:'d5',text:'Hakemli dergide yayımlanmış, atıflı araştırma',cat:'guvenilir'},{id:'d6',text:'“Gizli belge!” başlıklı anonim video',cat:'supheli'},{id:'d7',text:'Mizah hesabından alınıp gerçek haber gibi paylaşılan içerik',cat:'supheli'},{id:'d8',text:'Açık kaynakları, tarihi ve bağlamı belirtilmiş analiz',cat:'guvenilir'}];
+function renderDrag(){dragPlacements={};let src=document.getElementById('drag-source'),g=document.getElementById('drop-guvenilir'),s=document.getElementById('drop-supheli');src.innerHTML='<div class="label">Sınıflandırılacak kartlar</div>';g.innerHTML='<div class="label" style="color:var(--green)">✅ Güvenilir</div>';s.innerHTML='<div class="label" style="color:var(--red)">⚠️ Şüpheli / Yanlış</div>';dragData.forEach(it=>{let el=document.createElement('div');el.className='drag-item';el.id='di-'+it.id;el.draggable=true;el.textContent=it.text;el.addEventListener('dragstart',e=>e.dataTransfer.setData('id',it.id));src.appendChild(el)})}
+function allowDrop(e){e.preventDefault()}function dragEnter(el){el.classList.add('over')}function dragLeave(el){el.classList.remove('over')}function dropItem(e,cat){e.preventDefault();e.currentTarget.classList.remove('over');let id=e.dataTransfer.getData('id'),el=document.getElementById('di-'+id);if(el){e.currentTarget.appendChild(el);dragPlacements[id]=cat}}
+function checkDrag(){let c=0;dragData.forEach(it=>{let el=document.getElementById('di-'+it.id);if(dragPlacements[it.id]===it.cat){c++;if(el){el.style.background='#dcfce7';el.style.borderColor='var(--green)'}}else if(el){el.style.background='#fee2e2';el.style.borderColor='var(--red)'}});state.last.drag=c;state.scores.surukle=c*10;refresh();showMsg('drag-feedback',`${c}/${dragData.length} kart doğru sınıflandırıldı. +${c*10} puan.`,c>=6)}function resetDrag(){state.scores.surukle=0;state.last.drag=0;document.getElementById('drag-feedback').className='feedback';renderDrag();refresh()}
+function updateSkorPanel(){let t=total(),lvl=levelName(t);document.getElementById('final-score').textContent=t;document.getElementById('level').textContent='Seviye: '+lvl;document.getElementById('result-text').textContent=t>=230?'Mükemmel. Artık bilgi kirliliğine karşı güçlü bir dijital savunma refleksin var.':t>=170?'Çok iyi. Kaynak, bağlam ve görsel doğrulama refleksin güçlenmiş.':t>=90?'İyi başlangıç. Birkaç bölümü yeniden deneyerek rozetlerini artırabilirsin.':'Göreve yeni başladın. Rehberi okuyup tekrar dene.';[['b1',state.last.match>=5],['b2',state.last.fill>=4],['b3',state.tqResults.filter(Boolean).length>=3],['b4',state.last.drag>=6]].forEach(([id,ok])=>document.getElementById(id).classList.toggle('locked',!ok));refresh()}
+function resetAll(){state.scores={eslestirme:0,bosluk:0,teyit:0,surukle:0};state.matchSelected=null;state.matchSide=null;state.matchedPairs=[];state.fillActive=null;state.tqIndex=0;state.tqResults=[];state.last={match:0,fill:0,drag:0};resetMatching();resetFill();resetDrag();showTab('eslestirme',document.querySelector('[data-tab=eslestirme]'));refresh()}
+renderDrag();renderTQ();refresh();
 </script>
 </body>
 </html>
